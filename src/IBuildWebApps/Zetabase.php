@@ -1,4 +1,5 @@
 <?php
+	namespace IBuildWebApps ;
 
     class Zetabase
     {
@@ -30,16 +31,16 @@
                 switch (true)
                 {
                     case is_int($value):
-                        $type = PDO::PARAM_INT;
+                        $type = \PDO::PARAM_INT;
                         break;
                     case is_bool($value):
-                        $type = PDO::PARAM_BOOL;
+                        $type = \PDO::PARAM_BOOL;
                         break;
                     case is_null($value):
-                        $type = PDO::PARAM_NULL;
+                        $type = \PDO::PARAM_NULL;
                         break;
                     default:
-                        $type = PDO::PARAM_STR;
+                        $type = \PDO::PARAM_STR;
                 }
             }
             $this->bind_params[] = array('param' => $param, 'value' => $value, 'type' => $type);
@@ -53,7 +54,7 @@
                 $this->stmt->execute();
                 $this->error = 'Statement executed.';
                 return true;
-            } catch (PDOException $e)
+            } catch (\PDOException $e)
             {
                 $this->error = $e->getMessage();
                 return false;
@@ -63,13 +64,13 @@
         public function resultset()
         {
             $this->execute();
-            return $this->stmt->fetchAll(PDO::FETCH_OBJ);
+            return $this->stmt->fetchAll(\PDO::FETCH_OBJ);
         }
 
         public function single()
         {
             $this->execute();
-            return $this->stmt->fetch(PDO::FETCH_OBJ);
+            return $this->stmt->fetch(\PDO::FETCH_OBJ);
         }
 
         public function rowCount()
@@ -140,15 +141,15 @@
             $dsn = "mysql:host={$this->host};dbname={$this->dbname}";
 
             $options = array(
-                PDO::ATTR_PERSISTENT         => true,
-                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-                PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
-                PDO::ATTR_EMULATE_PREPARES   => true
+                \PDO::ATTR_PERSISTENT         => true,
+                \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
+                \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
+                \PDO::ATTR_EMULATE_PREPARES   => true
             );
 
             try
             {
-                $this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
+                $this->dbh = new \PDO($dsn, $this->user, $this->pass, $options);
             } catch (\Exception $e)
             {
                 $this->error = $e->getMessage();

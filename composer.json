@@ -1,0 +1,19 @@
+{
+    "name": "ibuildwebapps/zetabase",
+    "description": "PDO Database Wrapper",
+    "autoload": {
+        "psr-0": {
+            "IBuildWebApps": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "IBuildWebApps",
+            "email": "paul@ibuildwebapps.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0"
+    }
+}
